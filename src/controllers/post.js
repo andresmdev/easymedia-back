@@ -40,10 +40,47 @@ module.exports.getAllPost = async (req, res) => {
 
 module.exports.getPostByDate = async (req, res) => {
   const { id } = jwt.decode(req.headers['token']);
-  const date = req.params.date;
+  const  {date, type} = req.params;
 
   try {
-    const data = await post.getPostByDate(id, date);
+    const data = await post.getPostByDate(id, date, type);
+    res.send({
+      "success": true,
+      "data": data
+    });
+  }
+  catch (error) {
+    res.send({
+      "success": false,
+      "message": error
+    });
+  }
+}
+
+module.exports.getPostByText = async (req, res) => {
+  const { id } = jwt.decode(req.headers['token']);
+  const text = req.params.text;
+
+  try {
+    const data = await post.getPostByText(id, text);
+    res.send({
+      "success": true,
+      "data": data
+    });
+  }
+  catch (error) {
+    res.send({
+      "success": false,
+      "message": error
+    });
+  }
+}
+
+module.exports.getAllUserPost = async (req, res) => {
+  const { id } = jwt.decode(req.headers['token']);
+
+  try {
+    const data = await post.getAllUserPost();
     res.send({
       "success": true,
       "data": data

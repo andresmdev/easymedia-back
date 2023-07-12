@@ -14,10 +14,10 @@ exports.checkEmailData = async (email) => {
 	});
 }
 
-exports.registerUserData = async (name, email, password) => {
+exports.registerUserData = async (id, name, email, password) => {
   return new Promise( (resolve, reject) => {
-		db.query(`INSERT INTO users (Name, Email, Password)
-    VALUES(?,?,?)`, [name, email, password],
+		db.query(`INSERT INTO users (UniqueId, Name, Email, Password)
+    VALUES(?,?,?,?)`, [id, name, email, password],
 		(error, result) => {	
 			if(error) {
 				console.log(`Ha ocurrido un error: ${error.stack}`);

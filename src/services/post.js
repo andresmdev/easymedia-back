@@ -36,8 +36,37 @@ exports.getAllPost = async (user_id) => {
   }
 }
 
-exports.getPostByDate = async (user_id, date) => {
-  const result = await post.getPostByDateData(user_id, date);
+exports.getPostByDate = async (user_id, date, type) => {
+  var result = [];
+
+  if(type === "all") {
+    result = await post.getPostByDateTypeData(date);
+  }
+  else {
+    result = await post.getPostByDateData(user_id, date);
+  }
+
+  if(!result) {
+    throw "SYSTEM_ERROR";
+  }
+  else {
+    return result;
+  }
+}
+
+exports.getPostByText = async (user_id, text) => {
+  const result = await post.getPostByTextData(user_id, text);
+
+  if(!result) {
+    throw "SYSTEM_ERROR";
+  }
+  else {
+    return result;
+  }
+}
+
+exports.getAllUserPost = async () => {
+  const result = await post.getAllUserPostData();
 
   if(!result) {
     throw "SYSTEM_ERROR";

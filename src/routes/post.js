@@ -6,7 +6,9 @@ const post = require('../controllers/post');
 
 router.post('/', middleware.authToken, post.createPost);
 router.get('/', middleware.authToken, post.getAllPost);
-router.get('/date/:date', middleware.authToken, post.getPostByDate);
+router.get('/date/:date/:type', middleware.authToken, post.getPostByDate);
+router.get('/text/:text', middleware.authToken, post.getPostByText);
+router.get('/all', middleware.authToken, post.getAllUserPost);
 router.get('/:id', middleware.authToken, post.getPostById);
 
 /*
